@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export function Hero() {
   return (
     <div className="relative bg-white pt-10 pb-16 lg:pt-16">
@@ -31,11 +33,11 @@ export function Hero() {
             We help businesses modernize operations, enhance customer experiences, and unlock
             growth with in the intelligent solutions powered by data, cloud, and AI.
           </p>
-          <a href="#services" className="flex items-center gap-2 text-[20px] font-bold text-black">
+          <Link href="#services" className="flex items-center gap-2 text-[20px] font-bold text-black">
             See what we do
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/images/brand/arrow-right.svg" alt="" width={21} height={21} />
-          </a>
+          </Link>
         </div>
       </div>
     </div>

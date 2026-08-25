@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PageHeader } from "@/components/layout/PageHeader";
@@ -101,11 +102,11 @@ export default function WhatWeCreatePage() {
             </div>
 
             <div className="mt-8 flex justify-end">
-              <a href="#" className="flex items-center gap-2 text-[20px] font-bold text-black">
+              <Link href="#" className="flex items-center gap-2 text-[20px] font-bold text-black">
                 See All
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/images/brand/arrow-right.svg" alt="" width={21} height={21} />
-              </a>
+              </Link>
             </div>
           </div>
         </section>

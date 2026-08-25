@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PageHeader } from "@/components/layout/PageHeader";
@@ -16,67 +17,86 @@ type BelongCard = {
   title: string;
   description: string;
   image: string;
-  aspect: string;
+  left: number;
+  top: number;
+  width: number;
+  height: number;
+  textTop: number;
 };
 
-const leftCards: BelongCard[] = [
+// Absolute coordinates taken from the Figma "You belong here" mosaic (1440px frame).
+const belongCards: BelongCard[] = [
   {
     title: "Emotional & mental",
     description: "Access our comprehensive collection of reports,",
     image: "/images/careers/emotional-mental.png",
-    aspect: "438/551",
+    left: 110,
+    top: 0,
+    width: 438,
+    height: 551,
+    textTop: 571,
+  },
+  {
+    title: "Relational",
+    description: "Ensuring a sense of belonging and connection for all",
+    image: "/images/careers/relational.png",
+    left: 581,
+    top: 0,
+    width: 384,
+    height: 294,
+    textTop: 314,
+  },
+  {
+    title: "Physical",
+    description: "Supporting physical well-being",
+    image: "/images/careers/physical.png",
+    left: 729,
+    top: 571,
+    width: 594,
+    height: 385,
+    textTop: 975,
   },
   {
     title: "Purposeful",
     description: "Evolving our purpose to meet an enlightened workforce, customers and community",
     image: "/images/careers/purposeful.png",
-    aspect: "438/551",
-  },
-];
-
-const nearCards: BelongCard[] = [
-  {
-    title: "Relational",
-    description: "Ensuring a sense of belonging and connection for all",
-    image: "/images/careers/relational.png",
-    aspect: "384/294",
+    left: 122,
+    top: 1158,
+    width: 438,
+    height: 551,
+    textTop: 1729,
   },
   {
     title: "Employable",
     description: "Helping you get the right skills to advance to higher paying roles",
     image: "/images/careers/employable.png",
-    aspect: "384/294",
-  },
-];
-
-const farCards: BelongCard[] = [
-  {
-    title: "Physical",
-    description: "Supporting physical well-being",
-    image: "/images/careers/physical.png",
-    aspect: "594/385",
+    left: 593,
+    top: 1158,
+    width: 384,
+    height: 294,
+    textTop: 1472,
   },
   {
     title: "Financial",
     description: "Offering rewards and benefits packages to meet your needs",
     image: "/images/careers/financial.png",
-    aspect: "594/385",
+    left: 729,
+    top: 1729,
+    width: 594,
+    height: 385,
+    textTop: 2133,
   },
 ];
 
-function BelongCardArticle({ card }: { card: BelongCard }) {
+const BELONG_GRID_HEIGHT = 2260;
+
+function BelongCardMobile({ card }: { card: BelongCard }) {
   return (
     <article>
-      <div className="relative w-full overflow-hidden" style={{ aspectRatio: card.aspect }}>
-        <Image
-          src={card.image}
-          alt={card.title}
-          fill
-          sizes="(min-width: 1024px) 30vw, 100vw"
-          className="object-cover"
-        />
+      <div className="relative w-full overflow-hidden" style={{ aspectRatio: `${card.width}/${card.height}` }}>
+        <Image src={card.image} alt={card.title} fill sizes="100vw" className="object-cover" />
       </div>
-      <h3 className="mt-5 text-[24px] font-semibold leading-[1.05] text-black sm:text-[28px]">
+      <h3 className="mt-5 text-[24px] font-semibold leading-[104%] text-black sm:text-[28px]">
         {card.title}
       </h3>
       <p className="mt-2 max-w-[380px] text-[16px] leading-[1.4] text-[#171717] sm:text-[18px]">
@@ -204,26 +224,43 @@ export default function CareersPage() {
               inclusive environment where we all feel valued, seen and heard&mdash;we call this Net
               Better Off.
             </p>
+          </div>
 
-            <div className="mt-14 grid grid-cols-1 gap-16 lg:grid-cols-[438px_1fr] lg:gap-10">
-              <div className="flex flex-col gap-16">
-                {leftCards.map((card) => (
-                  <BelongCardArticle key={card.title} card={card} />
-                ))}
-              </div>
+          {/* Mobile / tablet: simple stacked fallback (the mosaic below is fixed-pixel to the 1440 design) */}
+          <div className="mx-auto mt-14 flex max-w-[1440px] flex-col gap-12 px-6 lg:hidden">
+            {belongCards.map((card) => (
+              <BelongCardMobile key={card.title} card={card} />
+            ))}
+          </div>
 
-              <div className="grid grid-cols-1 gap-10 sm:grid-cols-2">
-                <div className="flex flex-col gap-16">
-                  {nearCards.map((card) => (
-                    <BelongCardArticle key={card.title} card={card} />
-                  ))}
+          {/* Desktop: pixel-exact mosaic matching the Figma frame */}
+          <div className="mt-14 hidden overflow-x-auto lg:block">
+            <div
+              className="relative mx-auto w-[1440px]"
+              style={{ height: BELONG_GRID_HEIGHT }}
+            >
+              {belongCards.map((card) => (
+                <div key={card.title}>
+                  <div
+                    className="absolute overflow-hidden"
+                    style={{ left: card.left, top: card.top, width: card.width, height: card.height }}
+                  >
+                    <Image
+                      src={card.image}
+                      alt={card.title}
+                      fill
+                      sizes="600px"
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="absolute" style={{ left: card.left, top: card.textTop, width: card.width }}>
+                    <h3 className="text-[29px] font-semibold leading-[104%] text-black">{card.title}</h3>
+                    <p className="mt-2 max-w-[400px] text-[18px] leading-[25px] text-[#171717]">
+                      {card.description}
+                    </p>
+                  </div>
                 </div>
-                <div className="flex flex-col gap-16 sm:mt-28">
-                  {farCards.map((card) => (
-                    <BelongCardArticle key={card.title} card={card} />
-                  ))}
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
@@ -241,12 +278,12 @@ export default function CareersPage() {
                 Explore open roles that match your interests and skills.
               </p>
 
-              <a
+              <Link
                 href="/#careers"
                 className="mt-8 inline-flex h-[58px] w-[186px] items-center justify-center bg-[#2212FF] text-[16px] font-semibold capitalize text-white hover:opacity-90 sm:mt-[38px] sm:text-[19px]"
               >
                 Let&rsquo;s Connect
-              </a>
+              </Link>
             </div>
           </div>
         </section>

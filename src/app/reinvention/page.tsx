@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 
@@ -163,7 +164,7 @@ export default function ReinventionPage() {
                     multicultural team to build efficient platforms for real-time applications.
                   </p>
                 </div>
-                <a
+                <Link
                   href="#"
                   className="mt-8 inline-flex items-center gap-[10px] border border-black px-[45px] py-[10px] text-[16px] font-medium leading-[28px] text-black sm:text-[17.8px] lg:mt-[38px]"
                 >
@@ -171,7 +172,7 @@ export default function ReinventionPage() {
                   <svg width="8" height="14" viewBox="0 0 8 14" fill="none">
                     <path d="M1 1l6 6-6 6" stroke="#000" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                </a>
+                </Link>
               </div>
 
               <div className="lg:w-[555px]">

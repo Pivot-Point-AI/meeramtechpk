@@ -3,6 +3,14 @@
 import { useEffect, useState } from "react";
 
 const years = ["2026", "2025", "2024", "2023", "2022", "2021"];
+const stories = [
+  "Today, MeeramTech powers digital transformation for clients across Fintech, Healthcare, Transportation and Retail — with 100+ projects delivered, 60 clients served, a 250-strong multicultural team, and 5 industry awards recognizing our work.",
+  "We expanded our managed services and data science practice, deepening long-term partnerships with clients across the region as our team grew to support increasingly complex, always-on digital operations.",
+  "Our UI/UX design and web development capabilities matured into a full end-to-end offering, and the quality of that work earned MeeramTech its first industry awards.",
+  "Global partnerships took shape as we brought together a multicultural team spanning multiple markets, building the infrastructure to deliver real-time platforms at scale.",
+  "We broadened beyond software development into digital infrastructure services, taking on our first projects in Healthcare and Transportation alongside our founding Fintech clients.",
+  "Building on years of delivering technology-led BPO services since 2015, we sharpened our focus on custom software development for SMEs and corporates — the foundation MeeramTech still builds on today.",
+];
 const dotX = [17.2487, 249.385, 481.521, 713.657, 945.794, 1177.93];
 
 export function StoryTimeline() {
@@ -11,7 +19,7 @@ export function StoryTimeline() {
   useEffect(() => {
     const id = setInterval(() => {
       setActive((i) => (i + 1) % years.length);
-    }, 2000);
+    }, 10000);
     return () => clearInterval(id);
   }, []);
 
@@ -88,9 +96,7 @@ export function StoryTimeline() {
         </div>
 
         <p className="mt-8 pb-6 max-w-[336px] text-[13px] leading-[1.7]">
-          We secured $34 in series B funding and our platform grew to support 70,000 investors
-          and $150 billion in assets under management, solidifying our position as a leading
-          player in the industry.
+          {stories[active]}
         </p>
       </div>
     </section>

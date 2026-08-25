@@ -1,6 +1,8 @@
+import Link from "next/link";
+
 const companyLinks = [
   { label: "Preference Center", href: "#", bold: true },
-  { label: "Careers", href: "/#careers" },
+  { label: "Careers", href: "/careers" },
   { label: "About Us", href: "/who-we-are" },
   { label: "Contact Us", href: "/contact-us" },
   { label: "Locations", href: "/who-we-are#locations" },
@@ -29,7 +31,7 @@ export function Footer() {
                   key={link.label}
                   className={`py-2 text-[17px] text-black ${link.bold ? "font-semibold" : "font-normal"}`}
                 >
-                  <a href={link.href}>{link.label}</a>
+                  <Link href={link.href}>{link.label}</Link>
                 </li>
               ))}
             </ul>
@@ -38,7 +40,7 @@ export function Footer() {
             <ul className="flex flex-col gap-1">
               {legalLinks.map((link) => (
                 <li key={link} className="py-2 text-[17px] font-normal text-black">
-                  <a href="#">{link}</a>
+                  <Link href="#">{link}</Link>
                 </li>
               ))}
             </ul>

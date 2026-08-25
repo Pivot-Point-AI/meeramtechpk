@@ -40,7 +40,15 @@ const reportColumns: {
         height: "h-[220px] lg:h-[294px]",
       },
     },
-    { caption: "Annual Report", card: { kind: "solid", title: "2025 Annual Report", height: "h-[300px] lg:h-[421px]" } },
+    {
+      caption: "Annual Report",
+      card: {
+        kind: "solid",
+        image: "/images/seereport/acn-20241206_g124%201.png",
+        title: "2025 Annual Report",
+        height: "h-[340px] lg:h-[477px]",
+      },
+    },
   ],
   [
     {
@@ -96,23 +104,34 @@ function Chevron() {
 
 function CaptionLink({ label }: { label: string }) {
   return (
-    <a
+    <Link
       href="#"
       className="mt-3 flex items-center gap-2 text-[15px] font-medium leading-[1.6] text-[#171717] sm:text-[16px] lg:mt-[20px] lg:leading-[30px]"
     >
       {label}
       <Chevron />
-    </a>
+    </Link>
   );
 }
 
 function ReportCard({ card }: { card: (typeof reportColumns)[number][number]["card"] }) {
   if (card.kind === "solid") {
     return (
-      <div className={`relative w-full overflow-hidden bg-[#2212FF] ${card.height}`}>
-        <p className="absolute bottom-8 left-6 max-w-[230px] text-[24px] font-semibold leading-[1.15] text-white sm:text-[28px] lg:bottom-[65px] lg:left-[23px] lg:text-[32px] lg:leading-[36px]">
-          {card.title}
-        </p>
+      <div className={`relative w-full overflow-hidden ${card.height}`}>
+        {card.image && (
+          <Image src={card.image} alt="" fill sizes="(min-width: 1024px) 384px, 100vw" className="object-cover" />
+        )}
+        <div className="absolute bottom-0 right-0 top-[12%] left-[18%] bg-[#2212FF]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/brand/hero-mark.svg"
+            alt=""
+            className="absolute left-6 top-6 h-[18px] w-auto brightness-0 invert lg:left-[19px] lg:top-[19px] lg:h-[22px]"
+          />
+          <p className="absolute bottom-8 left-6 max-w-[230px] text-[24px] font-semibold leading-[1.15] text-white sm:text-[28px] lg:bottom-[174px] lg:left-[23px] lg:text-[32px] lg:leading-[36px]">
+            {card.title}
+          </p>
+        </div>
       </div>
     );
   }
@@ -153,7 +172,7 @@ export default function ValueReportPage() {
       <main>
         {/* Hero */}
         <section className="bg-white">
-          <div className="mx-auto max-w-[1440px] px-6 pb-10 pt-10 lg:px-[121px] lg:pb-[59px] lg:pt-[48px]">
+          <div className="mx-auto max-w-[1440px] px-6 pb-10 pt-10 lg:px-[121px] lg:pb-[61px] lg:pt-[48px]">
             <p className="text-[14px] font-semibold leading-[1.4] text-black sm:text-[18px] lg:text-[22px] lg:leading-[38px]">
               MeeramTech 360° Value Reporting Experience
             </p>
@@ -170,17 +189,17 @@ export default function ValueReportPage() {
         {/* What is 360 value */}
         <section className="bg-black">
           <div className="mx-auto flex max-w-[1440px] flex-col items-center px-6 pt-16 pb-16 text-center lg:px-[121px] lg:pt-[119px] lg:pb-[116px]">
-            <h2 className="max-w-[588px] text-[36px] font-semibold capitalize leading-[1] text-white sm:text-[48px] lg:text-[59px] lg:leading-[70%]">
+            <h2 className="whitespace-nowrap text-[28px] font-semibold capitalize leading-[1.1] text-white sm:text-[40px] lg:text-[59px] lg:leading-[70%]">
               What Is 360° Value?
             </h2>
-            <p className="mt-6 max-w-[742px] text-[18px] font-light leading-[1.4] text-white sm:text-[24px] lg:mt-[20px] lg:text-[32px] lg:leading-[40px]">
+            <p className="mt-6 max-w-[880px] text-[32px] font-light leading-[40px] text-white lg:mt-[20px]">
               We create 360° value by delivering measurable impact, supporting growth, and
               empowering clients through inclusion, skills, sustainability, and meaningful
               experiences.
             </p>
             <a
               href="#"
-              className="mt-8 flex h-[52px] w-full max-w-[435px] items-center justify-center bg-[#2212FF] px-6 text-center text-[16px] font-semibold capitalize leading-[70%] text-white sm:text-[18px] lg:mt-[45px] lg:h-[58px] lg:text-[19px]"
+              className="mt-8 flex h-[52px] w-full max-w-[435px] items-center justify-center bg-[#2212FF] px-6 text-center text-[16px] font-semibold leading-[70%] text-white sm:text-[18px] lg:mt-[45px] lg:h-[58px] lg:text-[19px]"
             >
               Download full report as accessible PDF
             </a>
@@ -190,7 +209,7 @@ export default function ValueReportPage() {
         {/* Six dimensions */}
         <section className="bg-white">
           <div className="mx-auto max-w-[1440px] px-6 py-16 lg:px-[121px] lg:pt-[125px] lg:pb-[100px]">
-            <h2 className="text-center text-[26px] font-semibold uppercase leading-[1.2] text-black sm:text-[32px] lg:text-[40px] lg:leading-[100%]">
+            <h2 className="whitespace-nowrap text-center text-[13px] font-semibold uppercase leading-[1.2] text-black sm:text-[20px] lg:text-[26px] min-[1150px]:text-[40px] min-[1150px]:leading-[100%]">
               Discover our six dimensions of 360° value
             </h2>
 
@@ -198,11 +217,11 @@ export default function ValueReportPage() {
               {dimensions.map((row) => (
                 <div
                   key={row.map((d) => d.word).join("-")}
-                  className="flex flex-col gap-8 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-x-16 lg:justify-between lg:gap-x-0"
+                  className="flex flex-col items-center gap-8 min-[1440px]:flex-row min-[1440px]:flex-nowrap min-[1440px]:justify-center min-[1440px]:gap-x-[35px]"
                 >
                   {row.map((dimension) => (
                     <div key={dimension.word} className="flex items-center gap-4 lg:gap-5">
-                      <div className="relative h-[62px] w-[90px] shrink-0 overflow-hidden bg-[#D9D9D9] sm:h-[76px] sm:w-[110px] lg:h-[85px] lg:w-[124px]">
+                      <div className="relative h-[62px] w-[90px] shrink-0 overflow-hidden rounded-[2px] bg-[#D9D9D9] sm:h-[76px] sm:w-[110px] lg:h-[85px] lg:w-[124px]">
                         <Image
                           src={dimension.image}
                           alt=""
@@ -225,10 +244,10 @@ export default function ValueReportPage() {
         {/* Stories of 360 value in action */}
         <section className="bg-black">
           <div className="mx-auto flex max-w-[1440px] flex-col items-center px-6 pt-16 pb-16 text-center lg:px-[121px] lg:pt-[152px] lg:pb-[128px]">
-            <h2 className="max-w-[895px] text-[34px] font-semibold capitalize leading-[1] text-white sm:text-[48px] lg:text-[59px] lg:leading-[70%]">
+            <h2 className="whitespace-nowrap text-[20px] font-semibold capitalize leading-[1.1] text-white sm:text-[32px] lg:text-[59px] lg:leading-[70%]">
               Stories Of 360° Value In Action
             </h2>
-            <p className="mt-6 max-w-[972px] text-[18px] font-normal leading-[1.4] text-white sm:text-[24px] lg:mt-[31px] lg:text-[32px] lg:leading-[40px]">
+            <p className="mt-6 max-w-[972px] text-[32px] font-normal leading-[40px] text-white lg:mt-[31px]">
               See more examples of 360° value in action: Check out our additional case studies.
             </p>
             <Link

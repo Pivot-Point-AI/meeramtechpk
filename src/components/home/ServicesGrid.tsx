@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ServiceCard, type ServiceCardData } from "@/components/ServiceCard";
 
 const services: ServiceCardData[] = [
@@ -65,11 +66,11 @@ export function ServicesGrid() {
         </div>
 
         <div className="mt-8 flex justify-end">
-          <a href="/what-we-do" className="flex items-center gap-2 text-[20px] font-bold text-black">
+          <Link href="/what-we-do" className="flex items-center gap-2 text-[20px] font-bold text-black">
             See all
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/images/brand/arrow-right.svg" alt="" width={21} height={21} />
-          </a>
+          </Link>
         </div>
       </div>
     </section>

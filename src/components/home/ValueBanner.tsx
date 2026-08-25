@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export function ValueBanner() {
   return (
     <section className="bg-black py-24 text-center text-white">
@@ -8,11 +10,11 @@ export function ValueBanner() {
         <p className="mx-auto mt-8 max-w-[560px] text-[20px] leading-[1.4]">
           Every day, we embrace change and create value for all our stakeholders around the world.
         </p>
-        <a href="#" className="mt-8 inline-flex items-center gap-2 text-[18px] font-bold">
+        <Link href="/360-value-report" className="mt-8 inline-flex items-center gap-2 text-[18px] font-bold">
           See the report
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/images/brand/arrow-right.svg" alt="" width={18} height={18} />
-        </a>
+        </Link>
       </div>
     </section>
   );

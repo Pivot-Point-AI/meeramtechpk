@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PageHeader } from "@/components/layout/PageHeader";
@@ -61,13 +62,13 @@ export default function OurProductsPage() {
                   />
                   <div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/60 to-transparent" />
 
-                  <a
+                  <Link
                     href={`/our-products/${product.slug}`}
                     aria-label={`Learn more about ${product.name}`}
                     className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full bg-white/80 text-black"
                   >
                     ↗
-                  </a>
+                  </Link>
 
                   <div className="absolute left-[31px] top-10 max-w-[488px]">
                     <h2 className="text-[28px] font-medium leading-[122%] tracking-[-0.5px] text-black sm:text-[36px]">
