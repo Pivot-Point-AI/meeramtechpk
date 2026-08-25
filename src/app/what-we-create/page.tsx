@@ -29,6 +29,7 @@ export default function WhatWeCreatePage() {
               </p>
             </div>
 
+
             <div className="mt-16 grid grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2">
               {/* left column */}
               <div className="flex flex-col gap-8 lg:gap-[140px]">
@@ -114,6 +115,7 @@ export default function WhatWeCreatePage() {
           heading="See Reinvention In Action"
           description="Every day, we help our clients reinvent their businesses to reach their full potential. Using technology, data, AI and new ways of working. We push boundaries and shape the future of industries."
           buttonLabel="View Client Stories"
+          buttonHref="/reinvention"
         />
       </main>
       <Footer />

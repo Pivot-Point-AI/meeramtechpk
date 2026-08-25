@@ -23,3 +23,26 @@ body {
   background: var(--background);
   color: var(--foreground);
 }
+
+@keyframes reinvention-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-reinvention-scroll {
+  animation: reinvention-scroll 28s linear infinite;
+}
+
+.animate-reinvention-scroll:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-reinvention-scroll {
+    animation: none;
+  }
+}

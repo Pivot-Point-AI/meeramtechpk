@@ -36,7 +36,7 @@ export default function ContactUsPage() {
                   you.
                 </p>
 
-                <div className="mt-14 grid grid-cols-2 gap-x-6 gap-y-10 sm:gap-x-16 sm:gap-y-[66px] lg:mt-[129px]">
+                <div className="mt-14 grid grid-cols-2 gap-x-6 gap-y-10 sm:gap-x-16 sm:gap-y-[48px] lg:mt-[129px]">
                   <div>
                     <p className="text-[18px] font-semibold uppercase text-[#292929] sm:text-[25px]">
                       Contact Us
@@ -52,7 +52,7 @@ export default function ContactUsPage() {
                     <p className="text-[18px] font-semibold uppercase text-[#292929] sm:text-[25px]">
                       Location
                     </p>
-                    <p className="mt-2 w-max max-w-full whitespace-pre-line text-[16px] font-normal leading-[1.5] text-[#292929] sm:mt-[15px] sm:text-[18px] sm:leading-[30px]">
+                    <p className="mt-2 w-max max-w-full whitespace-pre-line text-[16px] font-normal leading-[1.5] text-[#292929] sm:mt-[15px] sm:text-[18px] sm:leading-[30px] lg:max-w-none">
                       {"912, 9th floor, YES Business Tower,\nAl Barsha Road, Al Barsha 1, Dubai."}
                     </p>
                   </div>
