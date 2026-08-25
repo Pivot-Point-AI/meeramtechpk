@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+
+
 const years = ["2026", "2025", "2024", "2023", "2022", "2021"];
 const stories = [
   "Today, MeeramTech powers digital transformation for clients across Fintech, Healthcare, Transportation and Retail — with 100+ projects delivered, 60 clients served, a 250-strong multicultural team, and 5 industry awards recognizing our work.",
