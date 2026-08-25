@@ -29,7 +29,6 @@ export default function WhatWeCreatePage() {
               </p>
             </div>
 
-
             <div className="mt-16 grid grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2">
               {/* left column */}
               <div className="flex flex-col gap-8 lg:gap-[140px]">
