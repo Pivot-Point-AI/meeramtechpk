@@ -99,7 +99,7 @@ export function Testimonials() {
                   alt={t.name}
                   width={49}
                   height={49}
-                  className="rounded-full object-cover"
+                  className="size-[49px] shrink-0 rounded-full object-cover"
                 />
                 <div>
                   <p className="text-[18px] font-semibold uppercase">{t.name}</p>
@@ -136,7 +136,7 @@ export function Testimonials() {
               {group.map((t) => (
                 <div
                   key={t.name}
-                  className="flex w-full max-w-[300px] shrink-0 flex-col rounded-2xl bg-white p-8 shadow-[0_0_10px_0_rgba(0,0,0,0.05)] sm:w-[360px] sm:max-w-none"
+                  className="flex w-full max-w-[300px] shrink-0 flex-col rounded-2xl bg-white p-8 shadow-[0_0_10px_0_rgba(0,0,0,0.05)] transition-transform duration-300 ease-out hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-[360px] sm:max-w-none"
                 >
                   <span className="text-[52px] leading-none text-brand-blue">&ldquo;</span>
                   <p className="mt-2 flex-1 text-justify text-[16px] leading-[1.35] text-[#8d8d8d]">
@@ -148,7 +148,7 @@ export function Testimonials() {
                       alt={t.name}
                       width={49}
                       height={49}
-                      className="rounded-full object-cover"
+                      className="size-[49px] shrink-0 rounded-full object-cover"
                     />
                     <div>
                       <p className="text-[18px] font-semibold uppercase">{t.name}</p>

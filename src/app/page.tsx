@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { Reveal } from "@/components/Reveal";
 import { Hero } from "@/components/home/Hero";
 import { ServicesGrid } from "@/components/home/ServicesGrid";
 import { ClientLogos } from "@/components/home/ClientLogos";
@@ -16,17 +17,36 @@ export default function Home() {
     <>
       <Navbar />
       <main>
+        {/* Hero is left unwrapped so the LCP text is never painted at opacity 0. */}
         <Hero />
-        <ServicesGrid />
-        <ClientLogos />
-        <QuoteSection />
-        <ValueBanner />
-        <IndustriesSplit />
+        <Reveal>
+          <ServicesGrid />
+        </Reveal>
+        <Reveal>
+          <ClientLogos />
+        </Reveal>
+        <Reveal>
+          <QuoteSection />
+        </Reveal>
+        <Reveal>
+          <ValueBanner />
+        </Reveal>
+        <Reveal>
+          <IndustriesSplit />
+        </Reveal>
         <div className="pt-20"></div>
-        <StoryTimeline />
-        <CareersSection />
-        <NewsTicker />
-        <Testimonials />
+        <Reveal>
+          <StoryTimeline />
+        </Reveal>
+        <Reveal>
+          <CareersSection />
+        </Reveal>
+        <Reveal>
+          <NewsTicker />
+        </Reveal>
+        <Reveal>
+          <Testimonials />
+        </Reveal>
       </main>
       <Footer />
     </>

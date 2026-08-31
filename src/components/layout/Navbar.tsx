@@ -175,8 +175,8 @@ export function Navbar() {
                   type="button"
                   aria-expanded={productsOpen}
                   onClick={() => setProductsOpen((v) => !v)}
-                  className={`text-[18px] font-semibold hover:text-brand-blue ${
-                    productsOpen ? "text-brand-blue" : "text-[#070707]"
+                  className={`relative after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-brand-blue after:transition-[width] after:duration-300 hover:after:w-full motion-reduce:after:transition-none text-[18px] font-semibold hover:text-brand-blue ${
+                    productsOpen ? "text-brand-blue after:w-full" : "text-[#070707]"
                   }`}
                 >
                   {link.label}
@@ -186,7 +186,7 @@ export function Navbar() {
               <li key={link.label}>
                 <Link
                   href={link.href}
-                  className="text-[18px] font-semibold text-[#070707] hover:text-brand-blue"
+                  className="relative after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-brand-blue after:transition-[width] after:duration-300 hover:after:w-full motion-reduce:after:transition-none text-[18px] font-semibold text-[#070707] hover:text-brand-blue"
                 >
                   {link.label}
                 </Link>

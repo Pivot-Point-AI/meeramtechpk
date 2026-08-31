@@ -12,7 +12,7 @@ export type ServiceCardData = {
 export function ServiceCard({ title, description, image, background, light, split }: ServiceCardData) {
   return (
     <article
-      className="relative aspect-[279/438] overflow-hidden rounded-[4px]"
+      className="group relative aspect-[279/438] overflow-hidden rounded-[4px]"
       style={{ background: split ? background : undefined }}
     >
       {image && (
@@ -25,7 +25,7 @@ export function ServiceCard({ title, description, image, background, light, spli
             alt=""
             fill
             sizes="(min-width: 1024px) 25vw, 50vw"
-            className="object-cover"
+            className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
           />
           {!light && !split && (
             <div className="absolute inset-0" style={{ background, opacity: 0.4 }} />

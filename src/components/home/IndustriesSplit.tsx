@@ -8,24 +8,24 @@ export function IndustriesSplit() {
           <h2 className="text-[32px] font-medium text-white">Industries</h2>
         </div>
 
-        <div className="relative flex h-[280px] items-end overflow-hidden bg-black p-8 lg:h-[473px]">
+        <div className="group relative flex h-[280px] items-end overflow-hidden bg-black p-8 lg:h-[473px]">
           <Image
             src="/images/industries/fintech.png"
             alt="Fintech"
             fill
             sizes="(min-width: 640px) 33vw, 100vw"
-            className="object-cover"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
           />
           <h2 className="relative text-[25px] font-medium text-white">Fintech</h2>
         </div>
 
-        <div className="relative flex h-[280px] items-end overflow-hidden bg-black p-8 lg:h-[473px]">
+        <div className="group relative flex h-[280px] items-end overflow-hidden bg-black p-8 lg:h-[473px]">
           <Image
             src="/images/industries/Rectangle 637.png"
             alt="Ecommerce"
             fill
             sizes="(min-width: 640px) 33vw, 100vw"
-            className="object-cover"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
           />
           <h2 className="relative text-[25px] font-medium text-white">Ecommerce</h2>
         </div>

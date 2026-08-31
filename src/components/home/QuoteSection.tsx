@@ -49,28 +49,40 @@ export function QuoteSection() {
   return (
     <section className="bg-white py-20">
       <div className="mx-auto flex max-w-[1440px] flex-col items-center gap-12 px-6 lg:flex-row lg:gap-[52px] lg:px-[121px]">
-        <div className="relative h-[280px] w-full max-w-[570px] shrink-0 overflow-hidden border border-[#e9e9e9] bg-[#fbfbfb] lg:h-[370px]">
+        <div className="group relative h-[280px] w-full max-w-[570px] shrink-0 overflow-hidden border border-[#e9e9e9] bg-[#fbfbfb] lg:h-[370px]">
           <Image
             src={active.image}
             alt={active.attribution}
             fill
             sizes="(min-width: 1024px) 570px, 100vw"
-            className="object-cover"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
           />
         </div>
 
         <div className="max-w-[576px]">
-          <p className="text-[24px] font-medium leading-[1.5] text-black lg:text-[20px]">
-            &ldquo;{active.quote}&rdquo;
-          </p>
-          <p className="mt-6 text-[16px] text-[#171717]">{active.attribution}</p>
+          <div className="relative">
+            {quotes.map((q, i) => (
+              <div
+                key={q.attribution}
+                className={`transition-opacity duration-500 ease-out motion-reduce:transition-none ${
+                  i === index ? "relative opacity-100" : "pointer-events-none absolute inset-0 opacity-0"
+                }`}
+                aria-hidden={i !== index}
+              >
+                <p className="text-[24px] font-medium leading-[1.5] text-black lg:text-[20px]">
+                  &ldquo;{q.quote}&rdquo;
+                </p>
+                <p className="mt-6 text-[16px] text-[#171717]">{q.attribution}</p>
+              </div>
+            ))}
+          </div>
 
           <div className="mt-8 flex items-center gap-3">
             <button
               type="button"
               aria-label="Previous quote"
               onClick={() => setIndex((i) => (i - 1 + quotes.length) % quotes.length)}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e9e9e9] text-black transition hover:border-brand-blue hover:text-brand-blue"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e9e9e9] text-black transition duration-200 ease-out hover:border-brand-blue hover:text-brand-blue active:scale-90 motion-reduce:transition-none motion-reduce:active:scale-100"
             >
               <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M7 1L1 7L7 13" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
@@ -80,7 +92,7 @@ export function QuoteSection() {
               type="button"
               aria-label="Next quote"
               onClick={() => setIndex((i) => (i + 1) % quotes.length)}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e9e9e9] text-black transition hover:border-brand-blue hover:text-brand-blue"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e9e9e9] text-black transition duration-200 ease-out hover:border-brand-blue hover:text-brand-blue active:scale-90 motion-reduce:transition-none motion-reduce:active:scale-100"
             >
               <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1 1L7 7L1 13" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
@@ -93,7 +105,7 @@ export function QuoteSection() {
                   type="button"
                   aria-label={`Go to quote ${i + 1}`}
                   onClick={() => setIndex(i)}
-                  className={`h-2 rounded-full transition-all ${
+                  className={`h-2 rounded-full transition-all duration-300 hover:bg-brand-blue ${
                     i === index ? "w-6 bg-brand-blue" : "w-2 bg-[#e9e9e9]"
                   }`}
                 />

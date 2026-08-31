@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins, Arapey, Playfair_Display } from "next/font/google";
+import { SiteLoader } from "@/components/layout/SiteLoader";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -33,7 +34,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${poppins.variable} ${arapey.variable} ${playfair.variable} antialiased`}
     >
-      <body className="bg-white font-sans text-black">{children}</body>
+      <body className="bg-white font-sans text-black">
+        <SiteLoader />
+        {children}
+      </body>
     </html>
   );
 }

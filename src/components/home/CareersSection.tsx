@@ -29,7 +29,7 @@ export function CareersSection() {
   return (
     <section id="careers" className="bg-white py-20">
       <div className="mx-auto flex max-w-[1440px] flex-col items-center gap-12 px-6 lg:flex-row lg:gap-[52px] lg:px-[121px]">
-        <div className="relative h-[280px] w-full max-w-[656px] shrink-0 overflow-hidden lg:h-[434px]">
+        <div className="group relative h-[280px] w-full max-w-[656px] shrink-0 overflow-hidden lg:h-[434px]">
           {slides.map((slide, i) => (
             <Image
               key={slide.image}
@@ -37,7 +37,7 @@ export function CareersSection() {
               alt="MeeramTech team brainstorming"
               fill
               sizes="(min-width: 1024px) 656px, 100vw"
-              className={`object-cover transition-opacity duration-700 ${
+              className={`object-cover transition-[opacity,transform] duration-700 ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100 ${
                 i === active ? "opacity-100" : "opacity-0"
               }`}
             />
@@ -50,7 +50,7 @@ export function CareersSection() {
                 type="button"
                 aria-label={`Show slide ${i + 1}`}
                 onClick={() => setActive(i)}
-                className={`h-2 rounded-full transition-all duration-300 ${
+                className={`h-2 rounded-full transition-all duration-300 hover:bg-white ${
                   i === active ? "w-6 bg-white" : "w-2 bg-white/50"
                 }`}
               />

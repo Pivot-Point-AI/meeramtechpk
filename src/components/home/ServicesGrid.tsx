@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ServiceCard, type ServiceCardData } from "@/components/ServiceCard";
+import { Reveal } from "@/components/Reveal";
 
 const services: ServiceCardData[] = [
   {
@@ -59,17 +60,25 @@ export function ServicesGrid() {
   return (
     <section id="services" className="bg-white pb-20">
       <div className="mx-auto max-w-[1440px] px-6 lg:px-[121px]">
-        <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-[26px]">
+        {/* Reveal *is* the grid - no extra wrapper node, so the layout is
+            byte-for-byte what it was. */}
+        <Reveal stagger className="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-[26px]">
           {services.map((service) => (
             <ServiceCard key={service.title} {...service} />
           ))}
-        </div>
+        </Reveal>
 
         <div className="mt-8 flex justify-end">
-          <Link href="/what-we-do" className="flex items-center gap-2 text-[20px] font-bold text-black">
+          <Link href="/what-we-do" className="group flex items-center gap-2 text-[20px] font-bold text-black">
             See all
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/brand/arrow-right.svg" alt="" width={21} height={21} />
+            <img
+              src="/images/brand/arrow-right.svg"
+              alt=""
+              width={21}
+              height={21}
+              className="transition-transform duration-300 ease-out group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0"
+            />
           </Link>
         </div>
       </div>

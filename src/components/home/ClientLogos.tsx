@@ -1,3 +1,5 @@
+import { Reveal } from "@/components/Reveal";
+
 const logos = [
   { src: "/images/logos/huawei.svg", alt: "Huawei", width: 152 },
   { src: "/images/logos/dell-emc.svg", alt: "Dell EMC", width: 151 },
@@ -9,10 +11,11 @@ const logos = [
 export function ClientLogos() {
   return (
     <section aria-label="Technology partners" className="bg-black py-12">
-      <div className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-center gap-x-8 gap-y-6 px-6 sm:gap-x-16 sm:gap-y-8 lg:flex-nowrap lg:px-[121px]">
+      {/* Reveal *is* the flex row - no extra node, so spacing is untouched. */}
+      <Reveal stagger className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-center gap-x-8 gap-y-6 px-6 sm:gap-x-16 sm:gap-y-8 lg:flex-nowrap lg:px-[121px]">
         {logos.map((logo) => (
           // eslint-disable-next-line @next/next/no-img-element
-          <img key={logo.alt} src={logo.src} alt={logo.alt} width={logo.width} height={55} className="h-[36px] w-auto opacity-90" />
+          <img key={logo.alt} src={logo.src} alt={logo.alt} width={logo.width} height={55} className="h-[36px] w-auto opacity-90 transition duration-300 ease-out hover:scale-105 hover:opacity-100 motion-reduce:transition-none motion-reduce:hover:scale-100" />
         ))}
 
         <div className="flex items-center gap-3">
@@ -27,7 +30,7 @@ export function ClientLogos() {
             <p className="text-[12px] font-semibold">Gold Partner</p>
           </div>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

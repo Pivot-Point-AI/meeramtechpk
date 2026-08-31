@@ -50,8 +50,10 @@ export function NewsTicker() {
           return (
             <div
               key={i}
-              className={`grid grid-cols-1 gap-10 transition-opacity duration-700 sm:grid-cols-2 sm:gap-16 ${
-                i === active ? "relative opacity-100" : "absolute inset-0 opacity-0"
+              className={`grid grid-cols-1 gap-10 transition-[opacity,transform] duration-700 ease-out sm:grid-cols-2 sm:gap-16 motion-reduce:transition-none ${
+                i === active
+                  ? "relative translate-y-0 opacity-100"
+                  : "absolute inset-0 translate-y-2 opacity-0"
               }`}
             >
               {left && (
@@ -78,7 +80,7 @@ export function NewsTicker() {
             type="button"
             aria-label={`Show news slide ${i + 1}`}
             onClick={() => setActive(i)}
-            className={`h-2 rounded-full transition-all duration-300 ${
+            className={`h-2 rounded-full transition-all duration-300 hover:bg-white ${
               i === active ? "w-6 bg-white" : "w-2 bg-white/40"
             }`}
           />

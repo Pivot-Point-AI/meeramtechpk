@@ -33,10 +33,16 @@ export function Hero() {
             We help businesses modernize operations, enhance customer experiences, and unlock
             growth with in the intelligent solutions powered by data, cloud, and AI.
           </p>
-          <Link href="#services" className="flex items-center gap-2 text-[20px] font-bold text-black">
+          <Link href="#services" className="group flex items-center gap-2 text-[20px] font-bold text-black">
             See what we do
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/brand/arrow-right.svg" alt="" width={21} height={21} />
+            <img
+              src="/images/brand/arrow-right.svg"
+              alt=""
+              width={21}
+              height={21}
+              className="transition-transform duration-300 ease-out group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0"
+            />
           </Link>
         </div>
       </div>
