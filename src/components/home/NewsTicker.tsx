@@ -73,7 +73,6 @@ export function NewsTicker() {
         })}
       </div>
 
-
       <div className="mt-10 flex justify-center gap-2 px-6 lg:px-[121px]">
         {groups.map((_, i) => (
           <button
