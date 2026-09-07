@@ -27,6 +27,23 @@ const faqs = [
     answer:
       "Reach out through our Contact Us page and our team will schedule a consultation to understand your goals.",
   },
+  // The three below are the FAQs published on meeramtech.com/about, kept close
+  // to the original wording.
+  {
+    question: "Does MeeramTech have a global presence?",
+    answer:
+      "Yes. MeeramTech is present globally, with offices across Europe and the Middle East, and a footprint that continues to expand across Asia, Europe and Australia.",
+  },
+  {
+    question: "How is diversity in MeeramTech?",
+    answer:
+      "MeeramTech supports diversity in terms of age, gender, ethnicity, religion, disability, sexual orientation, education and national origin.",
+  },
+  {
+    question: "What is the environment like in MeeramTech?",
+    answer:
+      "MeeramTech offers a healthy learning and progressive environment, with the aim of continuously growing as an organization.",
+  },
 ];
 
 export function FaqAccordion() {
@@ -50,14 +67,24 @@ export function FaqAccordion() {
                   type="button"
                   onClick={() => setOpenIndex(open ? null : index)}
                   aria-expanded={open}
-                  className="flex w-full items-center justify-between gap-6 py-6 text-left text-[19px] font-normal sm:text-[23.6px]"
+                  aria-controls={`faq-answer-${index}`}
+                  className="flex w-full cursor-pointer items-center justify-between gap-6 py-6 text-left text-[19px] font-normal sm:text-[23.6px]"
                 >
                   {faq.question}
                   <span className="ml-4 flex h-4 w-4 shrink-0 items-center justify-center text-[20px] leading-none">
                     {open ? "−" : "+"}
                   </span>
                 </button>
-                {open && <p className="pb-6 text-[15px] leading-[1.6] text-white/75">{faq.answer}</p>}
+                {/* Rendered and `hidden` rather than unmounted, so every answer
+                    stays in the server HTML for crawlers and for anyone reading
+                    without JS - and so aria-controls points at a real node. */}
+                <p
+                  id={`faq-answer-${index}`}
+                  hidden={!open}
+                  className="pb-6 text-[15px] leading-[1.6] text-white/75"
+                >
+                  {faq.answer}
+                </p>
               </div>
             );
           })}
