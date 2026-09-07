@@ -30,23 +30,48 @@ export function ServiceCard({ title, description, image, background, light, spli
           {!light && !split && (
             <div className="absolute inset-0" style={{ background, opacity: 0.4 }} />
           )}
+          {light && !split && (
+            <>
+              <div
+                className="absolute inset-x-0 top-0 lg:hidden"
+                style={{
+                  height: "32%",
+                  background:
+                    "linear-gradient(180deg, rgba(255,255,255,0.94) 0%, rgba(255,255,255,0.7) 60%, rgba(255,255,255,0) 100%)",
+                }}
+              />
+              <div
+                className="absolute inset-x-0 top-0 hidden lg:block"
+                style={{
+                  height: "62%",
+                  background:
+                    "linear-gradient(180deg, rgba(255,255,255,0.94) 0%, rgba(255,255,255,0.75) 45%, rgba(255,255,255,0) 100%)",
+                }}
+              />
+            </>
+          )}
         </div>
       )}
 
-      <h3
-        className={`absolute text-[12px] font-bold uppercase leading-none tracking-wide ${
-          light ? "text-[#0e1013]" : "text-white"
-        }`}
+      <div
+        className="absolute flex flex-col gap-[17px]"
         style={{ left: "7.17%", top: `${(30 / 438) * 100}%`, width: "85%" }}
       >
-        {title}
-      </h3>
-      <p
-        className={`absolute text-[16px] leading-[1.4375] ${light ? "text-[#0e1013]" : "text-white"}`}
-        style={{ left: "7.17%", top: `${(59 / 438) * 100}%`, width: "85%" }}
-      >
-        {description}
-      </p>
+        <h3
+          className={`text-[12px] font-bold uppercase leading-none tracking-wide ${
+            light ? "text-[#0e1013]" : "text-white"
+          }`}
+        >
+          {title}
+        </h3>
+        <p
+          className={`hidden lg:line-clamp-3 text-[16px] leading-[1.4375] ${
+            light ? "text-[#0e1013]" : "text-white"
+          }`}
+        >
+          {description}
+        </p>
+      </div>
     </article>
   );
 }

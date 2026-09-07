@@ -81,19 +81,22 @@ export function Testimonials() {
         </h2>
 
         {/* Mobile: one testimonial at a time */}
-        <div className="relative mt-10 sm:hidden">
+        <div className="mt-10 grid sm:hidden [&>*]:col-start-1 [&>*]:row-start-1">
           {testimonials.map((t, i) => (
             <div
               key={t.name}
+              aria-hidden={i !== mobileActive}
               className={`flex w-full flex-col rounded-2xl bg-white p-8 shadow-[0_0_10px_0_rgba(0,0,0,0.05)] transition-opacity duration-700 ${
-                i === mobileActive ? "relative opacity-100" : "absolute inset-0 opacity-0"
+                i === mobileActive
+                  ? "opacity-100"
+                  : "pointer-events-none opacity-0"
               }`}
             >
               <span className="text-[52px] leading-none text-brand-blue">&ldquo;</span>
-              <p className="mt-2 text-justify text-[16px] leading-[1.35] text-[#8d8d8d]">
+              <p className="mt-2 text-[16px] leading-[1.35] text-[#8d8d8d]">
                 {t.quote}
               </p>
-              <div className="mt-8 flex items-center gap-3">
+              <div className="mt-auto flex items-center gap-3 pt-8">
                 <Image
                   src={t.avatar}
                   alt={t.name}
@@ -124,25 +127,26 @@ export function Testimonials() {
           ))}
         </div>
 
-        {/* sm and up: original grouped carousel, unchanged */}
-        <div className="relative mt-16 hidden sm:block">
+        {/* sm and up: grouped carousel */}
+        <div className="mt-16 hidden sm:grid [&>*]:col-start-1 [&>*]:row-start-1">
           {groups.map((group, i) => (
             <div
               key={i}
-              className={`flex flex-wrap justify-center gap-8 pb-4 transition-opacity duration-700 ${
-                i === active ? "relative opacity-100" : "absolute inset-0 opacity-0"
+              aria-hidden={i !== active}
+              className={`flex items-stretch justify-center gap-8 pb-4 transition-opacity duration-700 ${
+                i === active ? "opacity-100" : "pointer-events-none opacity-0"
               }`}
             >
               {group.map((t) => (
                 <div
                   key={t.name}
-                  className="flex w-full max-w-[300px] shrink-0 flex-col rounded-2xl bg-white p-8 shadow-[0_0_10px_0_rgba(0,0,0,0.05)] transition-transform duration-300 ease-out hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-[360px] sm:max-w-none"
+                  className="flex max-w-[360px] grow-0 basis-[calc(33.333%-1.334rem)] flex-col rounded-2xl bg-white p-8 shadow-[0_0_10px_0_rgba(0,0,0,0.05)] transition-transform duration-300 ease-out hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
                 >
                   <span className="text-[52px] leading-none text-brand-blue">&ldquo;</span>
-                  <p className="mt-2 flex-1 text-justify text-[16px] leading-[1.35] text-[#8d8d8d]">
+                  <p className="mt-2 text-[16px] leading-[1.35] text-[#8d8d8d]">
                     {t.quote}
                   </p>
-                  <div className="mt-8 flex items-center gap-3">
+                  <div className="mt-auto flex items-center gap-3 pt-8">
                     <Image
                       src={t.avatar}
                       alt={t.name}

@@ -42,21 +42,27 @@ export function ApproachSteps() {
           Four moves, in the same order, on every engagement
         </h2>
 
-        <div className="mt-14 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
-          {approachSteps.map((step, index) => {
+<div className="mt-14 grid grid-cols-1 items-start gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">          {approachSteps.map((step, index) => {
             const isActive = index === active;
 
             return (
-              <button
-                key={step.step}
-                type="button"
-                onClick={() => select(index)}
-                onMouseEnter={() => select(index)}
-                onFocus={() => select(index)}
-                aria-pressed={isActive}
-                className="group relative cursor-pointer text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue"
-              >
-                {/* Progress rail: fills while this step holds the floor. */}
+          <div
+  key={step.step}
+  role="button"
+  tabIndex={0}
+  onClick={() => select(index)}
+  onKeyDown={(e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      select(index);
+    }
+  }}
+  onMouseEnter={() => setActive(index)}
+  onFocus={() => select(index)}
+  aria-pressed={isActive}
+  className="group relative block cursor-pointer self-start text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue"
+>
+        {/* Progress rail: fills while this step holds the floor. */}
                 <span aria-hidden className="block h-[2px] w-full bg-[#e9e9e9]">
                   <span
                     className={`block h-full bg-brand-blue transition-[width] ease-linear ${
@@ -103,8 +109,7 @@ export function ApproachSteps() {
                 >
                   {step.description}
                 </p>
-              </button>
-            );
+</div>            );
           })}
         </div>
       </div>

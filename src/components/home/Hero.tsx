@@ -3,12 +3,12 @@ import Link from "next/link";
 export function Hero() {
   return (
     <div className="relative bg-white pt-10 pb-16 lg:pt-16">
-      <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-12 px-6 lg:grid-cols-[1fr_475px] lg:gap-[29px] lg:px-[121px]">
+      <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-12 px-6 lg:px-[121px] xl:grid-cols-[1fr_455px] xl:gap-[24px]">
         <h1 className="font-sans uppercase text-black">
           <span className="block text-[44px] font-bold leading-[0.74] sm:text-[56px] lg:text-[69px]">
             Together we
           </span>
-          <span className="mt-4 flex items-center gap-2 text-[32px] font-bold leading-none sm:ml-[3.86em] sm:gap-3 sm:text-[56px] lg:text-[69px]">
+          <span className="mt-4 flex items-center gap-2 text-[32px] font-bold leading-none sm:ml-[3.5em] sm:gap-3 sm:text-[56px] lg:text-[69px]">
             rei
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -20,7 +20,7 @@ export function Hero() {
           </span>
         </h1>
 
-        <div className="flex max-w-[475px] flex-col gap-[17px] lg:justify-self-end">
+        <div className="flex max-w-[455px] flex-col gap-[17px] xl:justify-self-end">
           <div
             className="h-1 w-[34px]"
             style={{

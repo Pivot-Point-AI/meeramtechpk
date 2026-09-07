@@ -21,7 +21,7 @@ export default function WhatWeCreatePage() {
         <section className="bg-white py-16">
           <div className="mx-auto max-w-[1440px] px-6 lg:px-[121px]">
             <div className="mx-auto max-w-[972px] text-center">
-              <h1 className="text-[28px] font-bold leading-[104%] text-black sm:text-[36px] lg:whitespace-nowrap lg:text-[46px]">
+              <h1 className="text-[28px] font-bold leading-[104%] text-black sm:text-[36px] lg:text-[46px]">
                 Capabilities that enable your reinvention
               </h1>
               <p className="mx-auto mt-6 max-w-[729px] text-[18px] font-medium leading-[30px] text-[#171717]">

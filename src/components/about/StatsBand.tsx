@@ -69,7 +69,7 @@ export function StatsBand() {
 
   return (
     <section ref={sectionRef} className="bg-black py-16 text-white lg:py-[130px]">
-      <div className="mx-auto flex max-w-[1440px] flex-wrap gap-x-16 gap-y-14 px-6 sm:flex-nowrap sm:justify-between lg:px-[121px]">
+      <div className="mx-auto flex max-w-[1440px] flex-wrap gap-x-16 gap-y-14 px-6 sm:justify-between lg:px-[121px]">
         {stats.map((stat) => (
           <div key={stat.label}>
             <div className="h-[7px] w-[34px] bg-gradient-to-r from-[#0015FF] to-[#BF00FF]" />

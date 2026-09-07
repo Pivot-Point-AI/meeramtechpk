@@ -189,7 +189,7 @@ export default function ValueReportPage() {
         {/* What is 360 value */}
         <section className="bg-black">
           <div className="mx-auto flex max-w-[1440px] flex-col items-center px-6 pt-16 pb-16 text-center lg:px-[121px] lg:pt-[119px] lg:pb-[116px]">
-            <h2 className="whitespace-nowrap text-[28px] font-semibold capitalize leading-[1.1] text-white sm:text-[40px] lg:text-[59px] lg:leading-[70%]">
+            <h2 className="text-[28px] font-semibold capitalize leading-[1.1] text-white sm:text-[40px] lg:text-[59px] lg:leading-[70%]">
               What Is 360° Value?
             </h2>
             <p className="mt-6 max-w-[880px] text-[32px] font-light leading-[40px] text-white lg:mt-[20px]">
@@ -209,7 +209,7 @@ export default function ValueReportPage() {
         {/* Six dimensions */}
         <section className="bg-white">
           <div className="mx-auto max-w-[1440px] px-6 py-16 lg:px-[121px] lg:pt-[125px] lg:pb-[100px]">
-            <h2 className="whitespace-nowrap text-center text-[13px] font-semibold uppercase leading-[1.2] text-black sm:text-[20px] lg:text-[26px] min-[1150px]:text-[40px] min-[1150px]:leading-[100%]">
+            <h2 className="text-center text-[13px] font-semibold uppercase leading-[1.2] text-black sm:text-[20px] lg:text-[26px] min-[1150px]:text-[40px] min-[1150px]:leading-[100%]">
               Discover our six dimensions of 360° value
             </h2>
 
@@ -217,7 +217,7 @@ export default function ValueReportPage() {
               {dimensions.map((row) => (
                 <div
                   key={row.map((d) => d.word).join("-")}
-                  className="flex flex-col items-center gap-8 min-[1440px]:flex-row min-[1440px]:flex-nowrap min-[1440px]:justify-center min-[1440px]:gap-x-[35px]"
+                  className="flex flex-col items-center gap-8 min-[1440px]:flex-row min-[1440px]:flex-wrap min-[1440px]:justify-center min-[1440px]:gap-x-[35px] min-[1440px]:gap-y-8"
                 >
                   {row.map((dimension) => (
                     <div key={dimension.word} className="flex items-center gap-4 lg:gap-5">
@@ -244,7 +244,7 @@ export default function ValueReportPage() {
         {/* Stories of 360 value in action */}
         <section className="bg-black">
           <div className="mx-auto flex max-w-[1440px] flex-col items-center px-6 pt-16 pb-16 text-center lg:px-[121px] lg:pt-[152px] lg:pb-[128px]">
-            <h2 className="whitespace-nowrap text-[20px] font-semibold capitalize leading-[1.1] text-white sm:text-[32px] lg:text-[59px] lg:leading-[70%]">
+            <h2 className="text-[20px] font-semibold capitalize leading-[1.1] text-white sm:text-[32px] lg:text-[59px] lg:leading-[70%]">
               Stories Of 360° Value In Action
             </h2>
             <p className="mt-6 max-w-[972px] text-[32px] font-normal leading-[40px] text-white lg:mt-[31px]">

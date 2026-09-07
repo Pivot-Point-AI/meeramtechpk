@@ -4,18 +4,18 @@ export function AboutIntro() {
   return (
     <section className="bg-white py-16 lg:py-20">
       <div className="mx-auto max-w-[1440px] px-6 lg:px-[121px]">
-        <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-[105px]">
-          <div className="relative aspect-[599/305] w-full shrink-0 overflow-hidden rounded-sm bg-[#d9d9d9] lg:h-[305px] lg:w-[599px]">
+        <div className="flex flex-col gap-10 min-[1420px]:flex-row min-[1420px]:items-center min-[1420px]:gap-[105px]">
+          <div className="relative aspect-[599/305] w-full shrink-0 overflow-hidden rounded-sm bg-[#d9d9d9] min-[1420px]:h-[305px] min-[1420px]:w-[599px]">
             <Image
               src="/images/about/office-meeting.png"
               alt="MeeramTech team meeting"
               fill
-              sizes="(min-width: 1024px) 599px, 100vw"
+              sizes="(min-width: 1420px) 599px, 100vw"
               className="object-cover"
             />
           </div>
 
-          <div className="lg:max-w-[472px]">
+          <div className="min-[1420px]:max-w-[472px]">
             <h1 className="text-[32px] font-bold leading-[1.08] text-black">
               Best IT-Solutions company
               <br />

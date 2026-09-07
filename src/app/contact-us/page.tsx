@@ -19,7 +19,7 @@ export default function ContactUsPage() {
       <main>
         <section className="bg-white py-16">
           <div className="mx-auto max-w-[1440px] px-6 lg:px-[100px]">
-            <div className="grid grid-cols-1 gap-16 lg:grid-cols-[657px_533px] lg:gap-x-[50px]">
+            <div className="grid grid-cols-1 gap-16 lg:grid-cols-[657fr_533fr] lg:gap-x-[50px]">
               <div>
                 <h1 className="text-[32px] font-bold capitalize leading-[1.2] text-[#292929] sm:text-[50px] sm:leading-[60px]">
                   We&rsquo;re Here To

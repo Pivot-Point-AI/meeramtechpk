@@ -79,8 +79,8 @@ export default function ReinventionPage() {
               Staying ahead of the game
             </h2>
 
-            <div className="mt-6 flex flex-col gap-10 lg:mt-[38px] lg:flex-row lg:items-start lg:justify-between">
-              <div className="flex flex-col gap-4 text-[16px] font-medium leading-[1.6] text-[#171717] sm:text-[17.8px] sm:leading-[28px] lg:w-[574px] lg:text-justify">
+            <div className="mt-6 flex flex-col gap-10 lg:mt-[38px] min-[1350px]:flex-row min-[1350px]:items-start min-[1350px]:justify-between">
+              <div className="flex flex-col gap-4 text-[16px] font-medium leading-[1.6] text-[#171717] sm:text-[17.8px] sm:leading-[28px] min-[1350px]:w-[574px] min-[1350px]:text-justify">
                 <p>
                   MeeramTech delivers customized and ready-made software solutions for SMEs and
                   corporates, enabling growth across industries like Fintech, Healthcare,
@@ -93,7 +93,7 @@ export default function ReinventionPage() {
                 </p>
               </div>
 
-              <div className="lg:w-[448px]">
+              <div className="min-[1350px]:w-[448px]">
                 <div className="relative aspect-[448/213] w-full overflow-hidden bg-[#D9D9D9]">
                   <Image
                     src="/images/clientstories/marble-product-backdrop-with-blank-space%201.png"
@@ -150,9 +150,9 @@ export default function ReinventionPage() {
               ))}
             </div>
 
-            <div className="mt-10 flex flex-col gap-10 lg:mt-[52px] lg:flex-row lg:items-start lg:justify-between">
-              <div className="lg:w-[574px]">
-                <div className="flex flex-col gap-4 text-[16px] font-medium leading-[1.6] text-[#171717] sm:text-[17.8px] sm:leading-[28px] lg:text-justify">
+            <div className="mt-10 flex flex-col gap-10 lg:mt-[52px] min-[1430px]:flex-row min-[1430px]:items-start min-[1430px]:justify-between">
+              <div className="min-[1430px]:w-[574px]">
+                <div className="flex flex-col gap-4 text-[16px] font-medium leading-[1.6] text-[#171717] sm:text-[17.8px] sm:leading-[28px] min-[1430px]:text-justify">
                   <p>
                     MeeramTech delivers customized and ready-made software solutions for SMEs and
                     corporates, enabling growth across industries like Fintech, Healthcare,
@@ -175,7 +175,7 @@ export default function ReinventionPage() {
                 </Link>
               </div>
 
-              <div className="lg:w-[555px]">
+              <div className="min-[1430px]:w-[555px]">
                 <div className="relative aspect-[555/312] w-full overflow-hidden bg-[#D9D9D9]">
                   <Image
                     src="/images/clientstories/preview.webp"

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
   { label: "What we do", href: "/what-we-do" },
@@ -48,7 +49,7 @@ const menuCards = [
 function ProductsMegaMenu({ onNavigate }: { onNavigate: () => void }) {
   return (
     <div
-      className="absolute left-1/2 top-[105px] hidden w-[1440px] max-w-[95vw] -translate-x-1/2 rounded-[11px] border border-[#F3F2F7] bg-white shadow-[0px_14px_49px_rgba(70,70,70,0.09)] lg:block"
+      className="absolute left-1/2 top-[105px] hidden w-[1440px] max-w-[95vw] -translate-x-1/2 rounded-[11px] border border-[#F3F2F7] bg-white shadow-[0px_14px_49px_rgba(70,70,70,0.09)] xl:block"
       style={{ minHeight: 402 }}
     >
       <p
@@ -141,6 +142,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     function onClickOutside(e: MouseEvent) {
@@ -167,16 +169,19 @@ export function Navbar() {
           <img src="/images/brand/logo-mark.svg" alt="MeeramTech" width={53} height={37} />
         </Link>
 
-        <ul className="hidden items-center gap-9 md:flex">
-          {navLinks.map((link) =>
-            link.label === "Our Products" ? (
+        <ul className="hidden items-center gap-9 xl:flex">
+          {navLinks.map((link) => {
+            const isActive =
+              link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
+
+            return link.label === "Our Products" ? (
               <li key={link.label}>
                 <button
                   type="button"
                   aria-expanded={productsOpen}
                   onClick={() => setProductsOpen((v) => !v)}
-                  className={`relative after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-brand-blue after:transition-[width] after:duration-300 hover:after:w-full motion-reduce:after:transition-none text-[18px] font-semibold hover:text-brand-blue ${
-                    productsOpen ? "text-brand-blue after:w-full" : "text-[#070707]"
+                  className={`relative block text-center after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-brand-blue after:transition-[width] after:duration-300 hover:after:w-full motion-reduce:after:transition-none text-[18px] font-semibold hover:text-brand-blue ${
+                    productsOpen || isActive ? "text-brand-blue after:w-full" : "text-[#070707]"
                   }`}
                 >
                   {link.label}
@@ -186,27 +191,27 @@ export function Navbar() {
               <li key={link.label}>
                 <Link
                   href={link.href}
-                  className="relative after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-brand-blue after:transition-[width] after:duration-300 hover:after:w-full motion-reduce:after:transition-none text-[18px] font-semibold text-[#070707] hover:text-brand-blue"
+                  aria-current={isActive ? "page" : undefined}
+                  className={`relative block text-center after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-brand-blue after:transition-[width] after:duration-300 hover:after:w-full motion-reduce:after:transition-none text-[18px] font-semibold hover:text-brand-blue ${
+                    isActive ? "text-brand-blue after:w-full" : "text-[#070707]"
+                  }`}
                 >
                   {link.label}
                 </Link>
               </li>
-            )
-          )}
+            );
+          })}
         </ul>
 
         <div className="flex items-center gap-5">
-          <button type="button" aria-label="Search" className="hidden text-[#262626] sm:block">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="8" cy="8" r="6.5" stroke="currentColor" strokeWidth="1.5" />
-              <path d="M17 17L13 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-            </svg>
+          <button type="button" aria-label="Search" className="hidden text-[#262626] xl:block">
+                     <img src="/images/misc/nav-flag.svg" alt="Pakistan" width={18} height={18} />
+
           </button>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/misc/nav-globe.svg" alt="" width={22} height={22} className="hidden sm:block" />
-          <button type="button" className="hidden items-center gap-1 text-[18px] font-semibold uppercase text-[#262626] sm:flex">
+          <img src="/images/misc/nav-globe.svg" alt="" width={22} height={22} className="hidden xl:block" />
+          <button type="button" className="hidden items-center gap-1 text-[18px] font-semibold uppercase text-[#262626] xl:flex">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/misc/nav-flag.svg" alt="Pakistan" width={18} height={18} />
             Pak
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/images/misc/chevron.svg" alt="" width={8} height={4} />
@@ -217,7 +222,7 @@ export function Navbar() {
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 md:hidden"
+            className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 xl:hidden"
           >
             <span className={`h-0.5 w-6 bg-black transition ${open ? "translate-y-2 rotate-45" : ""}`} />
             <span className={`h-0.5 w-6 bg-black transition ${open ? "opacity-0" : ""}`} />
@@ -229,32 +234,36 @@ export function Navbar() {
       {productsOpen && <ProductsMegaMenu onNavigate={() => setProductsOpen(false)} />}
 
       {open && (
-        <div className="border-t border-[#e9e9e9] bg-white px-6 py-6 md:hidden">
+        <div className="border-t border-[#e9e9e9] bg-white px-6 py-6 xl:hidden">
           <ul className="flex flex-col gap-5">
-            {navLinks.map((link) => (
-              <li key={link.label}>
-                <Link
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="text-[18px] font-semibold text-[#070707]"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
+            {navLinks.map((link) => {
+              const isActive =
+                link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
+              return (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    aria-current={isActive ? "page" : undefined}
+                    className={`text-[18px] font-semibold ${
+                      isActive ? "text-brand-blue underline underline-offset-4" : "text-[#070707]"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
 
-          <div className="mt-6 flex items-center gap-4 border-t border-[#e9e9e9] pt-6 sm:hidden">
+          <div className="mt-6 flex items-center gap-4 border-t border-[#e9e9e9] pt-6">
             <button type="button" aria-label="Search" className="flex items-center gap-2 text-[16px] font-semibold text-[#262626]">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="8" cy="8" r="6.5" stroke="currentColor" strokeWidth="1.5" />
-                <path d="M17 17L13 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-              </svg>
+                          <img src="/images/misc/nav-flag.svg" alt="Pakistan" width={18} height={18} />
+
               Search
             </button>
             <button type="button" className="ml-auto flex items-center gap-1 text-[16px] font-semibold uppercase text-[#262626]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/misc/nav-flag.svg" alt="Pakistan" width={18} height={18} />
               Pak
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/images/misc/chevron.svg" alt="" width={8} height={4} />
