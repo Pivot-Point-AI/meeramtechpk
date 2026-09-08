@@ -12,7 +12,8 @@ export function ClientLogos() {
   return (
     <section aria-label="Technology partners" className="bg-black py-12">
       {/* Reveal *is* the flex row - no extra node, so spacing is untouched. */}
-<Reveal stagger className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-center gap-x-8 gap-y-6 px-6 sm:gap-x-16 sm:gap-y-8 lg:px-[121px]">        {logos.map((logo) => (
+      <Reveal stagger className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-center gap-x-8 gap-y-6 px-6 sm:gap-y-8 lg:px-[121px]">
+        {logos.map((logo) => (
           // eslint-disable-next-line @next/next/no-img-element
           <img key={logo.alt} src={logo.src} alt={logo.alt} width={logo.width} height={55} className="h-[36px] w-auto opacity-90 transition duration-300 ease-out hover:scale-105 hover:opacity-100 motion-reduce:transition-none motion-reduce:hover:scale-100" />
         ))}
