@@ -7,7 +7,7 @@ const slides = [
   {
     image: "/images/people/careers-team.png",
     heading: "Grow your career at the heart of change",
-    text: "It’s your moment to stand out — use your creativity and curiosity to make an impact. Bring bold ideas that inspire change and push boundaries forward.",
+    text: "It's your moment to stand out — use your creativity and curiosity to make an impact. Bring bold ideas that inspire change and push boundaries forward.",
   },
   {
     image: "/images/people/careers-team2.png",
@@ -28,15 +28,15 @@ export function CareersSection() {
 
   return (
     <section id="careers" className="bg-white py-20">
-      <div className="mx-auto flex max-w-[1440px] flex-col items-center gap-12 px-6 lg:flex-row lg:gap-[52px] lg:px-[121px]">
-        <div className="group relative h-[280px] w-full max-w-[656px] shrink-0 overflow-hidden lg:h-[434px]">
+      <div className="mx-auto flex max-w-[1440px] flex-col items-center gap-12 px-6 min-[1350px]:flex-row min-[1350px]:gap-[52px] lg:px-[121px]">
+        <div className="group relative h-[280px] w-full max-w-[656px] shrink-0 overflow-hidden min-[1350px]:h-[434px]">
           {slides.map((slide, i) => (
             <Image
               key={slide.image}
               src={slide.image}
               alt="MeeramTech team brainstorming"
               fill
-              sizes="(min-width: 1024px) 656px, 100vw"
+              sizes="(min-width: 1350px) 656px, 100vw"
               className={`object-cover transition-[opacity,transform] duration-700 ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100 ${
                 i === active ? "opacity-100" : "opacity-0"
               }`}

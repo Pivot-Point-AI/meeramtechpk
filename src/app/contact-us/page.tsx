@@ -52,7 +52,7 @@ export default function ContactUsPage() {
                     <p className="text-[18px] font-semibold uppercase text-[#292929] sm:text-[25px]">
                       Location
                     </p>
-                    <p className="mt-2 w-max max-w-full whitespace-pre-line text-[16px] font-normal leading-[1.5] text-[#292929] sm:mt-[15px] sm:text-[18px] sm:leading-[30px] lg:max-w-none">
+<p className="mt-2 w-max max-w-full whitespace-pre-line text-[16px] font-normal leading-[1.5] text-[#292929] sm:mt-[15px] sm:text-[18px] sm:leading-[30px]">
                       {"912, 9th floor, YES Business Tower,\nAl Barsha Road, Al Barsha 1, Dubai."}
                     </p>
                   </div>
@@ -72,12 +72,12 @@ export default function ContactUsPage() {
                       Follow Us
                     </p>
                     <div className="mt-3 flex gap-3 text-[#292929] sm:mt-[15px]">
-                      <a href="#" aria-label="Facebook" className="transition-[color,transform] duration-300 ease-out hover:text-brand-blue hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue motion-reduce:transition-none motion-reduce:hover:scale-100">
+                      <a href="https://www.facebook.com/MeeramTech" aria-label="Facebook" className="transition-[color,transform] duration-300 ease-out hover:text-brand-blue hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue motion-reduce:transition-none motion-reduce:hover:scale-100">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                           <path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12Z" />
                         </svg>
                       </a>
-                      <a href="#" aria-label="LinkedIn" className="transition-[color,transform] duration-300 ease-out hover:text-brand-blue hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue motion-reduce:transition-none motion-reduce:hover:scale-100">
+                      <a href="https://www.linkedin.com/company/meeramtech" aria-label="LinkedIn" className="transition-[color,transform] duration-300 ease-out hover:text-brand-blue hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue motion-reduce:transition-none motion-reduce:hover:scale-100">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                           <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.6h.05c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.6c0-1.34-.02-3.06-1.87-3.06-1.87 0-2.16 1.46-2.16 2.97V21h-4V9Z" />
                         </svg>
