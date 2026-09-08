@@ -1,87 +1,145 @@
+// app/contact-us/actions.ts
 "use server";
 
-import { headers } from "next/headers";
-import { getTransport, buildEnquiry } from "@/lib/mailer";
-import { checkRateLimit } from "@/lib/rate-limit";
-import { CONTACT_LIMITS as LIMITS, type ContactState } from "@/lib/contact";
+import nodemailer from "nodemailer";
+import {
+  CONTACT_LIMITS,
+  type ContactField,
+  type ContactState,
+  type ContactValues,
+} from "@/lib/contact";
 
-/** Deliberately loose - the only real test of an address is sending to it. */
-const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+// ---- Inline SMTP config -----------------------------------------------
+// Swap host/port/secure to match wherever info@meeramtech.com actually lives:
+//   cPanel / shared hosting -> mail.meeramtech.com : 465, secure: true
+//   Google Workspace        -> smtp.gmail.com      : 465, secure: true   (app password)
+//   Microsoft 365           -> smtp.office365.com  : 587, secure: false  (STARTTLS)
+const SMTP_HOST = "smtp.office365.com";
+const SMTP_PORT = 587;
+const SMTP_SECURE = false;
+const SMTP_USER = "info@meeramtech.com";
+const SMTP_PASS = "Login@786";
 
-/** CR/LF in a header value is the classic injection vector. */
-const stripNewlines = (value: string) => value.replace(/[\r\n]+/g, " ").trim();
+const TO_ADDRESS = "info@meeramtech.com";
+// -----------------------------------------------------------------------
 
-async function clientKey() {
-  const h = await headers();
-  const forwarded = h.get("x-forwarded-for");
-  return forwarded?.split(",")[0]?.trim() || h.get("x-real-ip") || "unknown";
+/**
+ * Module scope, so the connection pool survives between invocations on a warm
+ * lambda instead of doing a fresh TLS handshake per submission.
+ */
+const transporter = nodemailer.createTransport({
+  host: SMTP_HOST,
+  port: SMTP_PORT,
+  secure: SMTP_SECURE,
+  auth: { user: SMTP_USER, pass: SMTP_PASS },
+  pool: true,
+  maxConnections: 2,
+  connectionTimeout: 10_000,
+  greetingTimeout: 10_000,
+  socketTimeout: 20_000,
+  tls: {
+    // Shared hosts often serve a certificate for the server's own hostname
+    // rather than mail.<domain>. Delete this once you've confirmed the cert
+    // matches — while it's here, the connection is not MITM-resistant.
+    rejectUnauthorized: false,
+  },
+});
+
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+function read(formData: FormData, field: ContactField): string {
+  const raw = formData.get(field);
+  return typeof raw === "string" ? raw.trim().slice(0, CONTACT_LIMITS[field]) : "";
+}
+
+/** Anything interpolated into a mail header must not carry CR/LF, or it can inject headers. */
+function headerSafe(value: string): string {
+  return value.replace(/[\r\n]+/g, " ").trim();
+}
+
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function validate(values: ContactValues): ContactState["errors"] {
+  const errors: NonNullable<ContactState["errors"]> = {};
+
+  if (!values.name) errors.name = "Please tell us your name.";
+  if (!values.email) errors.email = "Please enter your email address.";
+  else if (!EMAIL_PATTERN.test(values.email)) errors.email = "That email address doesn't look right.";
+  if (!values.message) errors.message = "Please write a short message.";
+  else if (values.message.length < 10) errors.message = "Please add a little more detail.";
+
+  return Object.keys(errors).length ? errors : undefined;
 }
 
 export async function submitContact(
-  _prev: ContactState,
+  _prevState: ContactState,
   formData: FormData
 ): Promise<ContactState> {
-  const name = stripNewlines(String(formData.get("name") ?? ""));
-  const email = stripNewlines(String(formData.get("email") ?? ""));
-  const subject = stripNewlines(String(formData.get("subject") ?? ""));
-  const message = String(formData.get("message") ?? "").trim();
-  const values = { name, email, subject, message };
+  const values: ContactValues = {
+    name: read(formData, "name"),
+    email: read(formData, "email"),
+    subject: read(formData, "subject"),
+    message: read(formData, "message"),
+  };
 
-  // Honeypot. Real people never fill a field they cannot see, so a value here
-  // is a bot. Return the success shape rather than an error: telling a bot it
-  // was caught just teaches whoever wrote it to stop filling the field.
+  // Honeypot. Report success so the bot marks the target as done and moves on.
   if (String(formData.get("company") ?? "").trim()) {
     return { status: "success" };
   }
 
-  const errors: ContactState["errors"] = {};
-  if (!name) errors.name = "Please enter your name.";
-  else if (name.length > LIMITS.name) errors.name = "That name is too long.";
-
-  if (!email) errors.email = "Please enter your email address.";
-  else if (!EMAIL.test(email) || email.length > LIMITS.email)
-    errors.email = "That email address does not look right.";
-
-  if (subject.length > LIMITS.subject) errors.subject = "That subject is too long.";
-
-  if (!message) errors.message = "Please enter a message.";
-  else if (message.length > LIMITS.message)
-    errors.message = `Please keep the message under ${LIMITS.message} characters.`;
-
-  if (Object.keys(errors).length) {
+  const errors = validate(values);
+  if (errors) {
     return { status: "error", errors, values };
   }
 
-  const limit = checkRateLimit(await clientKey());
-  if (!limit.allowed) {
-    return {
-      status: "error",
-      message: "You have sent several messages already. Please try again a little later.",
-      values,
-    };
-  }
-
-  const mailer = getTransport();
-  if (!mailer.ok) {
-    // Never leak which variables are unset to the browser; log for the operator.
-    console.error("[contact] SMTP is not configured. Missing:", mailer.missing.join(", "));
-    return {
-      status: "error",
-      message: "We could not send your message right now. Please email info@meeramtech.com directly.",
-      values,
-    };
-  }
+  const name = headerSafe(values.name);
+  const email = headerSafe(values.email);
+  const subject = headerSafe(values.subject);
 
   try {
-    await mailer.transport.sendMail(
-      buildEnquiry({ name, email, subject, message, from: mailer.user })
-    );
+    await transporter.sendMail({
+      // Must be the authenticated mailbox — most servers reject a mismatched
+      // From outright, and SPF/DMARC would fail even where they don't.
+      from: { name: "MeeramTech Website", address: SMTP_USER },
+      to: TO_ADDRESS,
+      // Puts the enquirer one click away in any mail client.
+      replyTo: { name, address: email },
+      subject: subject ? `[Website] ${subject}` : `[Website] New enquiry from ${name}`,
+      text: [
+        `Name: ${values.name}`,
+        `Email: ${values.email}`,
+        values.subject ? `Subject: ${values.subject}` : null,
+        "",
+        values.message,
+      ]
+        .filter(Boolean)
+        .join("\n"),
+      html: `
+        <div style="font-family:system-ui,-apple-system,'Segoe UI',sans-serif;font-size:15px;line-height:1.6;color:#1C1A1A">
+          <h2 style="margin:0 0 16px;font-size:18px">New website enquiry</h2>
+          <p style="margin:0 0 4px"><strong>Name:</strong> ${escapeHtml(values.name)}</p>
+          <p style="margin:0 0 4px"><strong>Email:</strong> ${escapeHtml(values.email)}</p>
+          ${values.subject ? `<p style="margin:0 0 4px"><strong>Subject:</strong> ${escapeHtml(values.subject)}</p>` : ""}
+          <hr style="border:none;border-top:1px solid #E5E5E5;margin:16px 0" />
+          <p style="margin:0;white-space:pre-wrap">${escapeHtml(values.message)}</p>
+        </div>
+      `,
+    });
+
     return { status: "success" };
   } catch (error) {
-    console.error("[contact] sendMail failed:", error);
+    // Server-side only — the user gets a generic line, never the SMTP detail.
+    console.error("[contact] send failed:", error);
     return {
       status: "error",
-      message: "We could not send your message right now. Please email info@meeramtech.com directly.",
+      message: "We couldn't send your message just now. Please try again, or email info@meeramtech.com directly.",
       values,
     };
   }

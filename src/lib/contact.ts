@@ -1,21 +1,31 @@
-/**
- * Shared shape for the contact form.
- *
- * This lives outside the "use server" module on purpose: such a module may only
- * export async functions, so a plain object exported from there does not get
- * bundled by value - the client receives a server reference instead, and
- * useActionState starts with a broken initial state.
- */
+// lib/contact.ts
+// Imported by a "use client" component, so this file must stay free of any
+// server-only code — types and constants only.
+
+/** Caps are enforced twice: `maxLength` in the browser, `.slice()` on the server. */
+export const CONTACT_LIMITS = {
+  name: 100,
+  email: 254, // RFC 5321 maximum
+  subject: 150,
+  message: 4000,
+} as const;
+
+export type ContactField = keyof typeof CONTACT_LIMITS;
+
+export type ContactValues = Record<ContactField, string>;
 
 export type ContactState = {
-  status: "idle" | "success" | "error";
+  status: "idle" | "error" | "success";
+  /** Form-level failure (transport error, unexpected throw). Rendered above the button. */
   message?: string;
-  /** Per-field problems, keyed by input name. */
-  errors?: Partial<Record<"name" | "email" | "subject" | "message", string>>;
-  /** Echoed back so a failed submit does not wipe what they typed. */
-  values?: { name: string; email: string; subject: string; message: string };
+  /** Per-field messages, rendered inline under the offending input. */
+  errors?: Partial<Record<ContactField, string>>;
+  /**
+   * Echoed back on failure. React resets an uncontrolled form once its action
+   * settles, and the reset restores each input to its current `defaultValue` —
+   * so without this the user loses everything they typed.
+   */
+  values?: ContactValues;
 };
 
 export const initialContactState: ContactState = { status: "idle" };
-
-export const CONTACT_LIMITS = { name: 100, email: 254, subject: 150, message: 5000 } as const;
